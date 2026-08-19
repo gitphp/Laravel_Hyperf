@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use SunnyPHP\Application;
+use SunnyPHP\Console\Kernel;
+
+$root = dirname(__DIR__);
+
+require $root . '/vendor/autoload.php';
+
+$app = Application::create($root);
+$app->boot();
+
+exit((new Kernel($app))->run($_SERVER['argv'] ?? []));

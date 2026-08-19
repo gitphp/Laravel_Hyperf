@@ -1,0 +1,10 @@
+/vendor/
+/.phpunit.cache
+/.phpunit.result.cache
+/storage/logs/*.log
+/storage/database.sqlite
+/storage/framework/cache/*.cache
+/storage/framework/sessions/*.sess
+/storage/framework/queue/*.job
+/storage/framework/queue/*.result
+composer.lock
