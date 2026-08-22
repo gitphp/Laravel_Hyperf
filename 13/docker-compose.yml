@@ -1,0 +1,41 @@
+services:
+    laravel:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      image: laravel:latest
+      container_name: laravel
+      hostname: laravel
+      pull_policy: build
+      restart: always
+      volumes:
+        - .:/var/www/html
+      healthcheck:
+        test: [ "CMD-SHELL", "php -r \"exit(@fsockopen('127.0.0.1', 9000) ? 0 : 1);\" || exit 1" ]
+        interval: 3s
+        timeout: 3s
+        retries: 20
+        start_period: 20s
+      networks:
+        - docker_containers
+
+    laravel-nginx:
+      image: nginx:alpine
+      #    pull_policy: always
+      container_name: laravel-nginx
+      ports:
+        - "81:80"
+      volumes:
+        - .:/var/www/html:ro
+        - ./configuration/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      depends_on:
+        laravel:
+          condition: service_healthy
+      networks:
+        - docker_containers
+
+networks:
+    docker_containers:
+        name: docker_containers
+        driver: bridge
+        external: true

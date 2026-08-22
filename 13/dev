@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -e
+cd "$(dirname "$0")"
+
+case "${1:-}" in
+  up)
+    docker compose up -d --build
+    docker compose ps
+    ;;
+  down)
+    docker compose down
+    echo "Stack stopped."
+    ;;
+  restart)
+    docker compose down
+    docker compose up -d --build
+    echo "Stack restarted."
+    ;;
+  logs)
+    if [ -z $2 ]; then
+        echo "Container name is required"
+        exit 1
+    fi
+    docker compose logs -f "${2:-$2}"
+    ;;
+  build)
+    docker compose build --no-cache
+    echo "Image rebuilt. Start the stack with: $0 up"
+    ;;
+  ps|status)
+    docker compose ps
+    ;;
+  shell)
+    if [ -z $2 ]; then
+        echo "Container name is required"
+        exit 1
+    fi
+    CONTAINER=$(docker compose ps -q $2)
+    if [ -z "$CONTAINER" ]; then
+      echo "PHP container not running. Start with: $0 up"
+      exit 1
+    fi
+    # Try bash, fallback to sh
+    if docker exec "$CONTAINER" command -v bash >/dev/null 2>&1; then
+      docker exec -it "$CONTAINER" bash
+    else
+      docker exec -it "$CONTAINER" sh
+    fi
+    ;;
+  *)
+    echo "Usage: $0 { up | down | restart | logs [service] | build | ps | ssh | shell }"
+    echo "  up      - Start all services"
+    echo "  down    - Stop all services"
+    echo "  restart - down then up"
+    echo "  logs    - Follow logs (run '$0 logs container_name')"
+    echo "  build   - Rebuild app image only (run '$0 up' to start)"
+    echo "  ps|status      - Container status and app URL check (run '$0 ps container_name')"
+    exit 1
+    ;;
+esac

@@ -1,0 +1,74 @@
+# ============================================================================
+# Created by https://dockerignore.com/
+# COMMON TEMPLATE for Docker
+# Website: https://dockerignore.com/
+# Repository: https://github.com/ronald2wing/.dockerignore
+# ============================================================================
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# TEMPLATE OVERVIEW & USAGE NOTES
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# • TEMPLATE TYPE: Common Template
+# • PURPOSE: Docker-specific patterns for all projects
+# • DESIGN PHILOSOPHY: Modular Docker patterns for combination with other templates
+# • COMBINATION GUIDANCE: Combine with language or framework templates as needed
+# • SECURITY CONSIDERATIONS: Docker files don't contain sensitive data but should be excluded
+# • BEST PRACTICES: Use to exclude Docker-related files from Docker builds
+# • OFFICIAL SOURCES: Docker best practices for Docker file exclusion
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# BUILD ARTIFACTS & OUTPUT
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# Docker build artifacts and output directories
+
+**/.docker-build/
+**/docker-build-output/
+**/docker-build/
+docker-build.log
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# CACHE & TEMPORARY FILES
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# Docker cache and temporary directories
+
+**/.docker-tmp/
+**/docker-tmp/
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# LOGS & DEBUG FILES
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+# Docker logs and debug files
+
+**/docker-logs/
+
+# ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+# OTHER
+**/.docker-cache/
+**/.docker-context/
+**/.docker/
+**/docker-cache/
+**/docker-context/
+**/docker-networks/
+**/docker-volumes/
+.dockercfg
+.dockerconfig
+.dockerconfig.json
+.dockerignore
+docker-compose.ci.yml
+docker-compose.debug.yml
+docker-compose.dev.yml
+docker-compose.example.yml
+docker-compose.local.yml
+docker-compose.override.yml
+docker-compose.test.yml
+docker-security-scan.json
+docker-vulnerability-report.json
+Dockerfile.dev
+Dockerfile.example
+Dockerfile.local
+Dockerfile.test
+grype-report.json
+snyk-report.json
+trivy-report.json
+.DS_Store
